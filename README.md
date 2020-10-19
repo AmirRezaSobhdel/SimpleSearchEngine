@@ -22,7 +22,7 @@ document store class contains a **TreeMap** with **docId as key** and **Document
 
 ### PostingList.kt
 
-posting list class contains an **ArrayList of docId's ** that represents documents that a token exists in .
+posting list class contains an **ArrayList of docId's** that represents documents that a token exists in .
 
 this class also contains some key functions for searching :
 
@@ -56,7 +56,7 @@ this class is responsible for all storage logic and operations (posting lists fo
 
 ### Logic
 
-tokens and their postingLists are stored **Distributedly** in hashmaps and these hashmaps are stored in files. I store all tokens in a single hashmap and store it in a single file but to reduce the **IO operation time** I distributed the tokens in hashmaps that each own a file.
+tokens and their postingLists are stored **Distributedly** in hashmaps and these hashmaps are stored in files. I could store all tokens in a single hashmap and then store it in a single file but to reduce the **IO operation time** I distributed the tokens in hashmaps that each own a file.
 
 **for example** : 
 
