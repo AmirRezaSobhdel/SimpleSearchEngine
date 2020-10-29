@@ -31,36 +31,61 @@ class PostingList {
 
     fun getDocIds() = docIds
 
-    fun and(other: PostingList): PostingList
+    fun and(others: MutableList<PostingList>): PostingList
     {
         val result = PostingList()
-        var i = 0
-        var j = 0
 
-        while (i < size() && j < other.size())
-        {
-            var a = docIds[i]
-            var b = other.docIds[j]
-            if (a == b)
-            {
-                result.add(a)
-                i++
-                j++
+        /** this hashmap represents a table of docIds and how many Posting Lists they appear in  **/
+        val postingListsDocIdAppearanceTable = hashMapOf<Int,Int>()
+
+        others.add(this)
+
+        others.forEach { postingList ->
+            postingList.docIds.forEach { docId ->
+                postingListsDocIdAppearanceTable[docId]?.let { count ->
+                    postingListsDocIdAppearanceTable[docId] = count + 1
+                }?: kotlin.run {
+                    postingListsDocIdAppearanceTable[docId] = 1
+                }
             }
-            else if (a < b)
-                i++
-            else j++
         }
+
+        postingListsDocIdAppearanceTable.keys.forEach { docId ->
+            if (postingListsDocIdAppearanceTable[docId] == others.size)
+                result.add(docId)
+        }
+
+
+        /** below code is for ANDing two posting lists **/
+//        var i = 0
+//        var j = 0
+//
+//        while (i < size() && j < other.size())
+//        {
+//            var a = docIds[i]
+//            var b = other.docIds[j]
+//            if (a == b)
+//            {
+//                result.add(a)
+//                i++
+//                j++
+//            }
+//            else if (a < b)
+//                i++
+//            else j++
+//        }
         return result
     }
 
-    fun or(other: PostingList): PostingList
+    fun or(others: List<PostingList>): PostingList
     {
         val result = PostingList()
         val orSet = mutableSetOf<Int>()
 
         orSet.addAll(docIds)
-        orSet.addAll(other.docIds)
+        others.forEach {
+            orSet.addAll(it.docIds)
+        }
 
         orSet.forEach {
             result.add(it)
