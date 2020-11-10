@@ -1,7 +1,8 @@
+import normalizer.Normalizer
+import testsource.ReadXmlFile
 import testsource.TestSourceRepository
 import java.util.*
 
-var texts = TestSourceRepository.texts
 val documentStore = DocumentStore()
 val invertedIndex = InvertedIndex()
 val scanner = Scanner(System.`in`)
@@ -9,31 +10,45 @@ val scanner = Scanner(System.`in`)
 fun main() {
 
 
-    texts.forEach {
+    ReadXmlFile().readXml("C:\\Users\\amire\\Desktop\\information retrieval\\simple.xml", object : ReadXmlFile.XmlReadCompletionListener {
+        override fun OnXmlReadCompleted(pairs: ArrayList<Pair<String, String>>?) {
 
 
-        val document = Document(title = it.first , body = it.second.toLowerCase())
 
-        documentStore.add(document)
-        invertedIndex.add(document)
-    }
+            pairs?.forEach {
 
-    while (true)
-    {
-        println("Enter your query:")
-        val line = scanner.nextLine().toLowerCase()
 
-        if (line == "quit")
-            return
 
-        invertedIndex.get(line)?.let {
-            it.getDocIds()?.let {
-                it.forEach {
-                    println(documentStore.get(it)?.title)
+
+                val document = Document(title = it.first , body = Normalizer.normalize(it.second))
+
+                documentStore.add(document)
+                invertedIndex.add(document)
+            }
+
+
+
+            while (true)
+            {
+                println("Enter your query:")
+                val line = scanner.nextLine().toLowerCase()
+
+                if (line == "quit")
+                    return
+
+                invertedIndex.get(line)?.let {
+                    it.getDocIds()?.let {
+                        it.forEach {
+                            println(documentStore.get(it)?.title)
+                        }
+
+                        println("total number of docs found is ${it.size}")
+                    }
                 }
+
             }
         }
 
-    }
+    })
 
 }

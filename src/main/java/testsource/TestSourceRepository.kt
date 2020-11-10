@@ -3,8 +3,12 @@ package testsource
 object TestSourceRepository {
 
 
+    fun getTexts(): ArrayList<Pair<String,String>>
+    {
+        return arrayListOf()
+    }
 
-    var texts = arrayListOf<Pair<String,String>>(
+    var text = arrayListOf<Pair<String,String>>(
             Pair("moon article" , "Main articles: Origin of the Moon, Giant-impact hypothesis, and Circumplanetary disk\n" +
                     "The Moon formed 4.51 billion years ago,[g] some 60 million years after the origin of the Solar System. Several forming mechanisms have been proposed,[33] including the fission of the Moon from Earth's crust through centrifugal force[34] (which would require too great an initial rotation rate of Earth),[35] the gravitational capture of a pre-formed Moon[36] (which would require an unfeasibly extended atmosphere of Earth to dissipate the energy of the passing Moon),[35] and the co-formation of Earth and the Moon together in the primordial accretion disk (which does not explain the depletion of metals in the Moon).[35] These hypotheses also cannot account for the high angular momentum of the Earth–Moon system.[37]\n" +
                     "\n" +

@@ -18,16 +18,18 @@ class InvertedIndex {
         distinctTokens.forEach {
             table[it]?.let { postingList ->
                 postingList.add(document.docId)
-                TokenAndPostingListTableStorageHandler.addDocIdToPostingListOfToken(it,document.docId)
+//                TokenAndPostingListTableStorageHandler.addDocIdToPostingListOfToken(it,document.docId)
             }?: kotlin.run {
                 table[it] = PostingList()
                 table[it]!!.add(document.docId)
-                TokenAndPostingListTableStorageHandler.addDocIdToPostingListOfToken(it,document.docId)
+//                TokenAndPostingListTableStorageHandler.addDocIdToPostingListOfToken(it,document.docId)
             }
         }
 
     }
 
-    fun get(token: String): PostingList? = TokenAndPostingListTableStorageHandler.getPostingListOfToken(token)
+    fun get(token: String): PostingList? = table[token]
+
+//    fun get(token: String): PostingList? = TokenAndPostingListTableStorageHandler.getPostingListOfToken(token)
 
 }

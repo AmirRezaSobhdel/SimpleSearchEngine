@@ -94,7 +94,7 @@ class PostingList {
         return result
     }
 
-    fun not(allDocIds: List<Int>): PostingList
+    fun not(allDocIds: ArrayList<Int>): PostingList
     {
 
         val result = PostingList()
@@ -113,6 +113,50 @@ class PostingList {
             }
         }
         return result
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun main(args: Array<String>) {
+
+
+            val allDocIds = PostingList()
+            allDocIds.add(1)
+            allDocIds.add(2)
+            allDocIds.add(3)
+            allDocIds.add(5)
+            allDocIds.add(6)
+            allDocIds.add(8)
+            allDocIds.add(12)
+            allDocIds.add(16)
+            allDocIds.add(20)
+
+            val postingList1 = PostingList()
+            postingList1.add(1)
+            postingList1.add(3)
+            postingList1.add(8)
+            postingList1.add(5)
+            postingList1.add(12)
+
+            val postingList2 = PostingList()
+            postingList2.add(1)
+            postingList2.add(2)
+            postingList2.add(5)
+            postingList2.add(12)
+            postingList2.add(6)
+
+            val postingList3 = PostingList()
+            postingList2.add(1)
+            postingList2.add(2)
+            postingList2.add(5)
+            postingList2.add(8)
+            postingList2.add(20)
+            postingList2.add(16)
+
+            println(postingList1.and(mutableListOf(postingList2)).not(allDocIds.docIds).docIds)
+            postingList1.and(mutableListOf(postingList2)).docIds
+        }
     }
 
 }
