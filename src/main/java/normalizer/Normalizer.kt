@@ -28,7 +28,8 @@ package normalizer
                 'أ' -> charList[it] = 'ا'
                 'إ' -> charList[it] = 'ا'
                 'ٱ' -> charList[it] = 'ا'
-//                'ء' -> charArr[it] = ' '
+                'آ' -> charList[it] = 'ا'
+                'ء' -> charList[it] = ' '
 
                 // digits
                 '0' -> charList[it] = '۰'
@@ -75,6 +76,19 @@ package normalizer
                 //Quotations mark
                 '"' -> charList[it] = ' '
 
+//                '<' -> charList[it] = ' '
+//                '>' -> charList[it] = ' '
+//                '=' -> charList[it] = ' '
+//                '+' -> charList[it] = ' '
+//                '%' -> charList[it] = ' '
+//                '#' -> charList[it] = ' '
+//                '*' -> charList[it] = ' '
+//                '|' -> charList[it] = ' '
+//                '^' -> charList[it] = ' '
+//                '&' -> charList[it] = ' '
+//                '_' -> charList[it] = ' '
+//                '$' -> charList[it] = ' '
+//                '~' -> charList[it] = ' '
 
 
             }

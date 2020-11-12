@@ -8,7 +8,7 @@ class InvertedIndex {
 
     fun add(document: Document)
     {
-        val tokens = document.body.split(" ")
+        val tokens = document.body.split("\\s+".toRegex())
         val distinctTokens = HashSet<String>()
 
         tokens.forEach {
@@ -29,6 +29,8 @@ class InvertedIndex {
     }
 
     fun get(token: String): PostingList? = table[token]
+
+    fun tokensCount() = table.keys.size
 
 //    fun get(token: String): PostingList? = TokenAndPostingListTableStorageHandler.getPostingListOfToken(token)
 
